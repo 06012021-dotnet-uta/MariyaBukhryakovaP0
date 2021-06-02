@@ -1,0 +1,4 @@
+{
+    "files.autoSave": "onFocusChange",
+    "typescript.referencesCodeLens.enabled": true
+}
