@@ -94,12 +94,7 @@ namespace rockpaperscissorsGame
        Console.WriteLine($"Thank you for playing {playerName} you chose to quit the game.");
         playGame  = false;
     }
-
-
             }// end of play agian loop
-
-            
-            
         } // end of main
     }// end of class
 }// end of namespace
