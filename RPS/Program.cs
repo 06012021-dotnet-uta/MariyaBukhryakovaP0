@@ -2,15 +2,15 @@
 
 namespace RPS
 {
-    partial class Program : GamePlayScoreRPS
+    partial class Program : BasePlayerRPS
     {
         static void Main(string[] args){
 //call a new game to start created instance of the moves
-            GameMovesRPS game1 = new GameMovesRPS();
+        GameMovesRPS game1 = new GameMovesRPS();
 //created a user
-            BasePlayerRPS user1 = new BasePlayerRPS();
+        BasePlayerRPS user1 = new BasePlayerRPS();
 //created the game tracking and scorekeeping 
-            GamePlayScoreRPS playNow = new GamePlayScoreRPS();
+        GamePlayScoreRPS playNow = new GamePlayScoreRPS();
 //welcome message
             game1.welcomeMessage();
 //Get user info

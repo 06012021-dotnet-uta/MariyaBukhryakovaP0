@@ -2,7 +2,9 @@ using System;
 
 namespace RPS
 {
-    public class BasePlayerRPS
+    public class BasePlayerRPS : IRPSGameMessages
+
+    // create constructor to initialize comp player?
     {
     //     // named the computer possibly not needed?
     //  public string computerPlayer = "The Machine";
@@ -34,13 +36,13 @@ namespace RPS
             } }
     public string askForFristNameMessage(){
         System.Console.WriteLine("Please enter your first name");
-        firstName = Console.ReadLine().Trim();
-        return firstName;
+        FirstName = Console.ReadLine().Trim();
+        return FirstName;
     }
     public string askForLastNameMessage(){
         System.Console.WriteLine("Please enter your last name");
-        lastName = Console.ReadLine().Trim();
-        return lastName;
-        }
+        LastName = Console.ReadLine().Trim();
+        return  LastName;
+    }
     }//eo class
 }//eo namespace
