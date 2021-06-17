@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace Proj0DBContext
+namespace Models
 {
-    public partial class Product
+    public class Product
     {
         public Product()
         {
