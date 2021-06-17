@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace Proj0DBContext
+namespace Models
 {
-    public partial class Customer
+    public class Customer
     {
         public Customer()
         {
@@ -15,14 +15,15 @@ namespace Proj0DBContext
         public int CustomerId { get; set; }
         public string CustomerFirstName { get; set; }
         public string CustomerLastName { get; set; }
-        public string AccountUserName { get; set; }
-        public string PassWord { get; set; }
+        public string CustomerUserName { get; set; }
+        public string CustomerPassWord { get; set; }
         public string CustomerEmail { get; set; }
         public string CustomerStreet { get; set; }
         public string CustomerCityt { get; set; }
         public string CustomerState { get; set; }
-        public int AcStore { get; set; }
+        public int CustomerStore { get; set; }
 
+        public virtual LocationDirectory CustomerStoreNavigation { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

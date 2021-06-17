@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace Proj0DBContext
+namespace Models
 {
-    public partial class LocationDirectory
+    public class LocationDirectory
     {
         public LocationDirectory()
         {
-            Orders = new HashSet<Order>();
+            Customers = new HashSet<Customer>();
             Stores = new HashSet<Store>();
         }
 
@@ -20,7 +20,7 @@ namespace Proj0DBContext
         public string StoreCitytAd { get; set; }
         public string StoreStateAd { get; set; }
 
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Customer> Customers { get; set; }
         public virtual ICollection<Store> Stores { get; set; }
     }
 }
