@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Proj0DBContext\Proj0DBContext.csproj" />
     <ProjectReference Include="..\Project0BLayer\Project0BLayer.csproj" />
   </ItemGroup>
 

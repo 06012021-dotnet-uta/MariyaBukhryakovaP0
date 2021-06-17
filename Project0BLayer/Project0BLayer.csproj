@@ -23,4 +23,9 @@
     <PackageReference Include="xunit" Version="2.4.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Models\Models.csproj" />
+    <ProjectReference Include="..\Proj0DBContext\Proj0DBContext.csproj" />
+  </ItemGroup>
+
 </Project>
