@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+
+#nullable disable
+
+namespace Proj0DBContext
+{
+    public partial class Customer
+    {
+        public Customer()
+        {
+            Orders = new HashSet<Order>();
+        }
+
+        public int CustomerId { get; set; }
+        public string CustomerFirstName { get; set; }
+        public string CustomerLastName { get; set; }
+        public string AccountUserName { get; set; }
+        public string PassWord { get; set; }
+        public string CustomerEmail { get; set; }
+        public string CustomerStreet { get; set; }
+        public string CustomerCityt { get; set; }
+        public string CustomerState { get; set; }
+        public int AcStore { get; set; }
+
+        public virtual ICollection<Order> Orders { get; set; }
+    }
+}
