@@ -25,5 +25,10 @@ namespace Models
 
         public virtual LocationDirectory CustomerStoreNavigation { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
+
+        public static implicit operator Customer(int v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

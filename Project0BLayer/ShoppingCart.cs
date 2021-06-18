@@ -29,7 +29,7 @@ namespace Project0Blayer
         /// Create dictionary to store prod ID and prod qt, and set up a random var to create order ID
         ///// </summary>
         public Dictionary<int, int> MyOrder = new Dictionary<int, int>();
-        public int OrderNumber { get; set; } = 101010;
+        public int OrderNumber { get; set; } 
         //r.Next(1000,1000000);-random num for orderID
         /// <summary>
         /// This will use store ID to show list of products in store with all details
@@ -84,28 +84,28 @@ namespace Project0Blayer
         public void AddItemsToOrder(int storeID)
         {
             int input = 1;
-            int IDtoCart = 0;
-            int InventorytoCart = 0;
+            int ProductIDInput = 0;
+           
             decimal total = 0.00M;
-            Store store = new Store();
+            
 
-            var myStore = _context.Stores.Include(a => a.StoreProduct).ToList();
+            var myStore = _context.Stores.Include(a => a.StoreProductNavigation).Where(x => x.StoreLocation == storeID).ToList();
 
             do
             {
                 Console.WriteLine("**********************************************************");
                 Console.WriteLine("Please enter the ProductID you want to add to your order:");
                 Console.WriteLine("**********************************************************");
-                IDtoCart = Convert.ToInt32(Console.ReadLine());
+                ProductIDInput = Convert.ToInt32(Console.ReadLine());
                 foreach (var item in myStore)
                 {
-                    if (item.StoreProduct.ProductId != IDtoCart)
-                        //{
-                        //    Console.WriteLine("That is not a valid entry please type in the product ID");
-                        //}
-                        Console.WriteLine($"You chose {item.StoreProduct.ProductName}");
+                    if (item.StoreProductNavigation.ProductId != ProductIDInput)
+                    {
+                        Console.WriteLine("That is not a valid entry please type in the product ID");
+                    }
+                    Console.WriteLine($"You chose {item.StoreProduct.}");
                     Console.WriteLine("Please enter the ammount of items you want to add to your cart:");
-                    InventorytoCart = Convert.ToInt32(Console.ReadLine());
+                    int InventorytoCart = Convert.ToInt32(Console.ReadLine());
                     if (item.ProductInventory < InventorytoCart)
                     {
                         Console.WriteLine($"You entered {InventorytoCart}, and your current store only has {item.ProductInventory}.\nPlease input a valid quantity.");
@@ -113,13 +113,13 @@ namespace Project0Blayer
                     else if (item.ProductInventory >= InventorytoCart)
                     {
                         Console.WriteLine($"Your chose: {InventorytoCart} items. ");
-                        Console.WriteLine("Price per item {0:C} ", item.StoreProduct.ProductPrice);
-                        Console.WriteLine($"Department: {item.StoreProduct.Department} Description: {item.StoreProduct.ProductDescription}");
+                        Console.WriteLine("Price per item {0:C} ", item.StoreProductNavigation.ProductPrice);
+                        Console.WriteLine($"Department: {item.StoreProduct.de} Description: {item.StoreProductNavigation.ProductPrice}");
                         Console.WriteLine("Enter 6 if you want to add another item, or 9 if you want to check out");
                         input = Convert.ToInt32(Console.ReadLine());
-                        MyOrder.Add(item.StoreProduct.ProductId, item.ProductInventory);
+                        MyOrder.Add(item.StoreProductNavigation.ProductId, item.ProductInventory);
                         decimal productTimesQt = 0.00m;
-                        productTimesQt = item.StoreProduct.ProductPrice * InventorytoCart;
+                        productTimesQt = item.StoreProductNavigation.ProductPrice * InventorytoCart;
                         total = productTimesQt * InventorytoCart;
                         if (input == 9) break;
                     }
@@ -133,29 +133,29 @@ namespace Project0Blayer
 
 
 
-        public void CheckOut(string userName)
+        public void CheckOut(int accountID, int storeID )
         {
 
-            string orderID = OrderNumber.ToString();
+            OrderNumber = 101010;
             int itemsLeftInstock = 0;
-            var acctIDD = _context.Customers.Where(z => z.AccountUserName == userName).Select(y => y.CustomerId);
+            var stock = _context.Customers.Where(z => z.CustomerId == accountID);
 
             foreach (KeyValuePair<int, int> kvp in MyOrder)
             {
                 Store store = new Store()
                 {
-                    StoreId1 = StoreID,
-                    //ProductInventory =  kvp.Value - ProductInventory,
+                    StoreLocation = StoreID,
+                    ProductInventory = kvp.Value - ,
 
 
                 };
                 Order order = new Order()
                 {
-                    OrderId = orderID,
-                    OrderAccount = acctID,
+                    OrderId = OrderNumber,
+                    OrderAccount = accountID,
                     OrderProductId = kvp.Key,
                     OrderStoreId = StoreID,
-                    NumberofProducts = kvp.Value
+                    OrderProductQantity = kvp.Value
 
                 };
                 _context.Orders.Add(order);

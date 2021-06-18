@@ -1,0 +1,57 @@
+CREATE DATABASE Project0;
+
+CREATE TABLE Customer
+(
+CustomerId INT PRIMARY KEY NOT NULL IDENTITY(1000,1000),
+CustomerFirstName NVARCHAR (20) NOT NULL,
+CustomerLastName NVARCHAR (20) NOT NULL,
+CustomerUserName NVARCHAR (20) NOT NULL,
+CustomerPassWord NVARCHAR (20) NOT NULL,
+CustomerEmail NVARCHAR (40) NOT NULL,
+CustomerStreet NVARCHAR (60) NULL,
+CustomerCityt NVARCHAR (60) NULL,
+CustomerState NVARCHAR (2) NULL,
+CustomerStore INT NOT NULL,
+CONSTRAINT CustomerStore FOREIGN KEY(CustomerStore) REFERENCES LocationDirectory(StoreId),
+) 
+CREATE TABLE Product
+(
+ProductId INT PRIMARY KEY NOT NULL IDENTITY (10,10),
+ProductName NVARCHAR (20) NOT NULL,
+ProductPrice SMALLMONEY NOT NULL,
+ProductDescription NVARCHAR (200) NULL,
+Department NVARCHAR (200) NULL,
+)
+CREATE TABLE LocationDirectory
+(
+StoreId INT PRIMARY KEY IDENTITY(100,100)NOT NULL,
+StoreName NVARCHAR (30) NOT NULL,
+StorePhone BIGINT NULL,
+StoreStreetAd NVARCHAR (60) NOT NULL,
+StoreCitytAd NVARCHAR (60) NOT NULL,
+StoreStateAd NVARCHAR (2) NOT NULL
+--StoreCountry NVARCHAR (2) NOT NULL,
+)
+CREATE TABLE Store
+(
+StoreLocation INT NOT NULL,
+StoreProduct INT NOT NULL,
+ProductInventory INT NOT NULL,
+CONSTRAINT StoreLocation FOREIGN KEY(StoreLocation) REFERENCES LocationDirectory(StoreId),
+CONSTRAINT StoreProduct FOREIGN KEY (StoreProduct) REFERENCES Product(ProductId),
+PRIMARY KEY (StoreLocation, StoreProduct, ProductInventory)
+--not sure what to put after this constraint should i have one? should i just keep the 2 foreign?
+)
+CREATE TABLE Orders
+(
+Tracking INT PRIMARY KEY IDENTITY(1,1)NOT NULL,
+OrderID NVARCHAR(20) NOT NULL,
+OrderAccountId INT NOT NULL,
+OrderStoreID INT NOT NULL,
+OrderProductId INT NOT NULL,
+OrderProductQantity INT NULL,
+OrderDate DATETIME NOT NULL DEFAULT(GETDATE()),
+CONSTRAINT FK1 FOREIGN KEY (OrderAccountId) REFERENCES Customer(CustomerId),
+CONSTRAINT FK2 FOREIGN KEY (OrderProductId)  REFERENCES Product(ProductId),
+CONSTRAINT PFK FOREIGN KEY (OrderStoreID,OrderProductId, OrderProductQantity )  REFERENCES Store (StoreLocation, StoreProduct, ProductInventory),
+)

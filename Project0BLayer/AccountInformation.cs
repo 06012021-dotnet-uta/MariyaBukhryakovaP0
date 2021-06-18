@@ -21,7 +21,7 @@ namespace Project0Blayer
         /// </summary>
         public int AccountHistoryMessage()
         {
-            var Accounts = _context.Customers.Where(x => x.AccountUserName == MyUserName).ToList();
+            var Accounts = _context.Customers.Where(x => x.CustomerUserName == MyUserName).ToList();
             int userInput = 0;
 
 
@@ -40,7 +40,7 @@ namespace Project0Blayer
         }
         public int AccountOptions()
         {
-            var Accounts = _context.Customers.Where(x => x.AccountUserName == MyUserName).ToList();
+            var Accounts = _context.Customers.Where(x => x.CustomerUserName == MyUserName).ToList();
             foreach (var user in Accounts)
             {
                 Console.WriteLine("**********************************************************");
@@ -96,8 +96,8 @@ namespace Project0Blayer
         public int DisplayMyOrders(string userName)
         {
             int userInput = 0;
-            var myAccount = _context.Customers.Where(x => x.AccountUserName == userName);
-            var myOrders = _context.Orders.Include(x => x.OrderAccountNavigation).ToList();
+            var myAccount = _context.Customers.Where(x => x.CustomerUserName == userName);
+            var myOrders = _context.Orders.Include(x => x.OrderAccount).ToList();
             foreach (var c in myAccount)
             {
                 foreach (var o in myOrders)
@@ -105,7 +105,7 @@ namespace Project0Blayer
                     decimal total = 0.00M;
                     if (o.OrderId == o.OrderId && o.OrderProductId == o.OrderProduct.ProductId && o.OrderAccount == c.CustomerId)
                     {
-                        total = (decimal)(o.NumberofProducts * o.OrderProduct.ProductPrice);
+                        total = (decimal)(o.OrderProductQantity * o.OrderProduct.ProductPrice);
                         Console.WriteLine($"OrderID: {o.OrderId} Order Date: {o.OrderDate}, Item Name: {o.OrderProduct.ProductName} Product ID: {o.OrderProductId} Number Of Items: {o.NumberofProducts}");
                         Console.WriteLine($"Price Of each Item: {o.OrderProduct}  {o.OrderDate}, Item Name: {o.OrderProduct.ProductName} Product ID: {o.OrderProductId} Number Of Items: {o.NumberofProducts}");
 

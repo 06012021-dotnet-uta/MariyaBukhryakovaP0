@@ -18,5 +18,7 @@ namespace Models
         public virtual Customer OrderAccount { get; set; }
         public virtual Store OrderNavigation { get; set; }
         public virtual Product OrderProduct { get; set; }
+
+     
     }
 }

@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Project0BLayer.AppModels;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Preoject_O.Validators
 {
-    public class CustomerValidator : AbstractValidator<CustomerModel>
+    public class CustomerValidator : AbstractValidator<Customer>
     {
         public CustomerValidator()
         {
@@ -23,11 +23,11 @@ namespace Preoject_O.Validators
             .WithMessage("{PropertyName} is not a valid length ").
             Must(ValidNameEntry).WithMessage("{PropertyName} contians invalid characters");
 
-            RuleFor(p => p.AccountUserName).Cascade(CascadeMode.Stop)
+            RuleFor(p => p.CustomerUserName).Cascade(CascadeMode.Stop)
             .NotEmpty().WithMessage("{PropertyName} is is Empty ").Length(2, 50)
             .WithMessage("{PropertyName} is not a valid length ");
 
-            RuleFor(p => p.PassWord).Cascade(CascadeMode.Stop)
+            RuleFor(p => p.CustomerPassWord).Cascade(CascadeMode.Stop)
           .NotEmpty().WithMessage("{PropertyName} is is Empty ").Length(2, 500)
           .WithMessage("{PropertyName} is not a valid length ");
 
@@ -41,7 +41,7 @@ namespace Preoject_O.Validators
            .WithMessage("{PropertyName} is not a valid length ");
 
 
-            RuleFor(p => p.CustomerCity).Cascade(CascadeMode.Stop)
+            RuleFor(p => p.CustomerCityt).Cascade(CascadeMode.Stop)
            .NotEmpty().WithMessage("{PropertyName} is is Empty ").Length(3, 50)
            .WithMessage("{PropertyName} is not a valid length ")
            .Must(ValidNameEntry).WithMessage("{PropertyName} contians invalid characters");
@@ -51,7 +51,7 @@ namespace Preoject_O.Validators
            .WithMessage("{PropertyName} is not a valid length ")
            .Must(ValidNameEntry).WithMessage("{PropertyName} contians invalid characters");
 
-            RuleFor(p => p.AcStore)
+            RuleFor(p => p.CustomerStore)
              .Must(ValidNumberEntry).WithMessage("{PropertyName} contians invalid selection");
         }
 
