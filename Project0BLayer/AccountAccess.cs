@@ -1,20 +1,21 @@
 using Models;
-using Preoject_O.Validators;
 using Proj0DBContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
+
 
 namespace Project0Blayer
 {
-    public class AccountAccess
+    public class AccountAccess : AddToDB
     {
         private static readonly Project0Context _context = new Project0Context();
         /// <summary>
         /// Welcome Message to store, offers to log in or register
         /// </summary>
         /// <returns></returns>
+        /// 
+        
         public int WelcomeMessage()
         {
             Console.WriteLine("**********************************************************");
@@ -37,7 +38,7 @@ namespace Project0Blayer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public int HasAccessExistingAccount(int input, out string userName)
+        public int HasAccessExistingAccount(int input)
         {
             Console.WriteLine("Please enter your Username:");
             string inputUN = Console.ReadLine().Trim();
@@ -62,6 +63,7 @@ namespace Project0Blayer
             userName = " ";
             return 0;
         }
+
         /// <summary>
         /// Getting user info and validation
         /// </summary>
@@ -70,11 +72,7 @@ namespace Project0Blayer
         {
             Console.WriteLine("Please input a UserName:");
             string userName = Console.ReadLine().Trim();
-            if (userName.Length > 20 || userName.Length < 1)
-            {
-                Console.WriteLine("That is not a valid entry, please try again");
-                return null;
-            }
+            
             return userName;
         }
         public string getUserPassword()
@@ -184,36 +182,30 @@ namespace Project0Blayer
             }
             return location;
         }
-        /// <summary>
-        /// this saves user to DB after all the input prompts, returns store ID and out var of username
-        /// </summary>
-        public void AddCustomer(string fname, string lname, string username,
-            string pw, string email, string street, string city, string state, int storeID, out string setusername)
+        public int AddCustomer(string fname, string lname, string username,
+           string pw, string email, string street, string city, string state, int storeID)
         {
-            using (var context = new Project0Context())
+            var newUser = new Customer()
             {
-                var newUser = new Customer()
-                {
-                    CustomerFirstName = fname,
-                    CustomerLastName = lname,
-                    AccountUserName = username,
-                    PassWord = pw,
-                    CustomerEmail = email,
-                    CustomerStreet = street,
-                    CustomerCityt = city,
-                    CustomerState = state,
-                    AcStore = storeID
+                CustomerFirstName = fname,
+                CustomerLastName = lname,
+                CustomerUserName = username,
+                CustomerPassWord = pw,
+                CustomerEmail = email,
+                CustomerStreet = street,
+                CustomerCityt = city,
+                CustomerState = state,
+                CustomerStore = storeID
 
-                };
-                Console.WriteLine("***************************************************");
-                Console.WriteLine($"Thank you {fname} {lname}!\nYour account has been registered.");
-                _context.Customers.Add(newUser);
-                _context.SaveChanges();
-                setusername = username;
-            }
+            };
+            Console.WriteLine("***************************************************");
+            Console.WriteLine($"Thank you {fname} {lname}!\nYour account has been registered.");
+            _context.Customers.Add(newUser);
+            _context.SaveChanges();
+            var userID = _context.Customers.Select(x => x.CustomerId).Last();
+            return userID;
 
         }
-
     }
 
 }
