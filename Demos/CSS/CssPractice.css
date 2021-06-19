@@ -1,18 +1,18 @@
 .cssdemo{
   width: 150;
   border-style: solid;
-  border-color: red;
-  border-width: 100px 25px;
+  border-color: rgb(225, 0, 255);
+  border-width: 50px 50px;
 }
 
 div {
-  background-color: #52f7f7;
-  width: 150;
+  background-color: #2acece;
+  width: 200px;
 }
 
 .class1, .class2{
-  border: 15px dotted blue ;
-  width: 100;
+  border: .3rem dotted blue ;
+  width: 150px;
 }
 
 #id1{
@@ -23,7 +23,7 @@ div {
 
 /* select everything on the doc */
 /* *{
-  background-color: burlywood;
+  background-color: rgb(247, 229, 205);
 } */
 
 .class3:active{
@@ -38,18 +38,19 @@ width:100;
 }
 
 a:visited{
-  color:pink;
+  color:rgb(219, 60, 20);
 }
 
 /* get the first gen descendent of an element and change it on hover*/
 div>sub:hover{
   background-color: pink;
 }
-
+ 
 .class5::first-letter{
-  color:brown;
+  color:rgb(241, 16, 211);
   font-variant: small-caps;
-  font-style: italic;
+  font-style: oblique;
+  font-size: xx-large;
 }
 
 ul+ol{
@@ -63,10 +64,10 @@ changing it */
   border: solid pink;
 }
 form~p{
-  color: aqua;
+  color: rgb(16, 31, 238);
   /* user !important to override all other
    stylings before or after this styling */
-  border: dashed black !important;
+  border: 0.5rem outset rgb(230, 131, 131) !important;
   border-width: 15px 10px 5px 1px;
   /* border-color: black; /*you can only stule all four sides at ones with this*/
   /*border-width: 50px 30px 20px 10px; */
@@ -74,20 +75,21 @@ form~p{
 }
 
 #myPic{
-  position: sticky;
-  top: 80px;
-  right: 0;
-  width: 80px;
-  height: 100px;
-  border: 3px solid #73AD21;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 10px;
+  height: 150px;
+  /* s */
 }
 
 #boxModelId{
-  background-color: grey;
+  background-color: rgb(27, 49, 146);
   width: 150;
-  border: 15px solid green;
+  border: 20px double rgb(227, 228, 204);
   margin: 20px 50px 100px;
   padding: 50px;
   text-align: center;
   text-shadow: #52f7f7;
+  color: blanchedalmond;
 }
