@@ -4,8 +4,4 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="WPFFormulaBox" Version="1.9.1" />
-  </ItemGroup>
-
 </Project>
